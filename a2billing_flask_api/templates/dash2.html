@@ -1,0 +1,102 @@
+{% extends "dash2_base.html" %}
+{% block body %}
+{% if session.logged_in %}
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+                  <li role="presentation" class="active"><a href="{{ url_for('home') }}">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('did') }}">Did</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">entVoice</h3>
+      </div>
+      <div class="jumbotron">
+	      <p class="lead">Your balance is {{ entry }}</p>
+        <p><a class="btn btn-lg btn-success" href="{{ url_for('payment') }}" role="button">Add Credit</a></p>
+      </div>
+       <form action="{{ url_for('home') }}" method=post> 
+	       <input id="e1" class='raw' name="daterange" onchange="this.form.submit()"> 
+	</p>
+	</form>
+	<div class="panel panel-default">
+	<div class="panel-heading">Call Records</div>
+     	    <table class="table table-hover">
+              <thead>
+                <tr>
+		  <th>Did</font></th>
+                  <th>Time</th>
+		  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+		{% for record in records %}
+			<tr>
+			<td>{{ record.dnid }}</td>
+			<td>{{ record.stime }}</td>
+			<td>{{ record.duration }}</td>
+			</tr>
+		{% else %}
+                        <tr><td>No calls</td><td></td></tr>
+		{% endfor %}
+		</tbody>
+	    </table>
+    </div>
+
+	    <div id="paginator"></div>
+      <footer class="footer">
+        <p>Entrux © </p>
+      </footer>
+    </div> 
+	<script id="script_e1" type="text/javascript">
+	$("#e1").daterangepicker({
+			presetRanges: [{
+			        text: 'Today',
+	          		dateStart: function() { return moment() },
+		           	dateEnd: function() { return moment() }
+			        }, {
+				text: 'Yesterday',
+				dateStart: function() { return moment().add('days', -1) },
+				dateEnd: function() { return moment().add('days', -1) }
+				}, {
+				text: 'Last 7 Days',
+				dateStart: function() { return moment() },
+				dateEnd: function() { return moment().add('days', -6) }
+				}, {
+				text: 'Last Week',
+				dateStart: function() { return moment().add('weeks', -1).startOf('week') },
+				dateEnd: function() { return moment().add('weeks', -1).endOf('week') }
+				}, {
+				text: 'Last Month',
+				dateStart: function() { return moment().add('months', -1).startOf('month') },
+				dateEnd: function() { return moment().add('months', -1).endOf('month') }
+				}, {
+				text: 'Last Year',
+				dateStart: function() { return moment().add('months', -12).startOf('month') },
+				dateEnd: function() { return moment().add('months', -12).endOf('month') }
+				}],
+		     datepickerOptions : {
+		              numberOfMonths : 0
+			           }
+				    });
+	</script>
+	<script>
+		$(document).ready(function(){
+				$('#e1').change(fucntion(e){
+					});
+		$('#e1').trigger('post');
+	</script>
+	<script type='text/javascript'>
+        var options = {
+			    currentPage: {{ pageno }},
+			    totalPages: {{ total}},
+		            pageUrl: function(type, page, current){
+			        return "http://127.0.0.1:8008/home?page="+page;
+		 }
+	}
+        $('#paginator').bootstrapPaginator(options);
+	    </script>
+{% endif %}
+{% endblock %}
+

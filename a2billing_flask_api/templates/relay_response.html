@@ -1,0 +1,16 @@
+{% extends "dash2_base.html" %}
+{% block body %}
+{% if session.logged_in %}
+<script type="text/javascript">
+    var referrer = document.referrer;
+        if (referrer.substr(0,7)=="http://") referrer = referrer.substr(7);
+	    if (referrer.substr(0,8)=="https://") referrer = referrer.substr(8);
+	        if(referrer && referrer.indexOf(document.location.hostname) != 0) {
+			        document.location = '{{relayUrl}}';
+				    }
+</script>
+<noscript>
+	    <meta http-equiv="refresh" content="0;url={{relayUrl}}">
+</noscript>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "dash_base.html" %}
+{% block body%}
+{% if session.logged_in %}
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">entVoice</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">DiD</a></li>
+		  <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="inner cover">
+		  <h1 class="cover-heading">{{ entry }}</h1>
+            <p class="lead">is your current balance.</p>
+	    <p class="lead">
+	                <a href="#" class="btn btn-lg btn-default">Add Credit</a>
+		                  </p>	
+          </div>
+	  <div class="panel panel-default">
+		    <!-- Default panel contents -->
+		      <div class="panel-heading">Call Records</div>
+     	    <table class="table">
+              <thead>
+                <tr>
+			<th>Did</font></th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+		{% for record in records %}
+			<tr><td>{{ record.dnid }}</td><td>{{ record.stime }}</td></tr>
+		{% else %}
+                        <tr><td>No calls</td><td></td></tr>
+		{% endfor %}
+		</tbody>
+	    </table>
+    </div>
+
+
+    <div class="mastfoot">
+            <div class="inner">
+              <p><a href="http://entvoice.com/">entVoice</a>, The Next Generation Telecom System</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+{% endif %}
+{% endblock %}
+

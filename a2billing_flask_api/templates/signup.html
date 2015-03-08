@@ -1,0 +1,56 @@
+{% extends "login_base.html" %}
+{% block body%}
+   <div class="container">
+	   {% if error %}<p> {{ error }} </p>{% endif %}
+       <form class="form-signin" action="{{ url_for('signup') }}" method=post> 
+        <h2 class="form-signin-heading">Sign Up</h2>
+        <label for="inputEmail" class="sr-only">Username / Tel no.</label>
+	<input type="tel" id="input" name ="username" class="form-control" placeholder="10 digit Tel no." required="" pattern="\+?1?\s*\(?-*\.*(\d{3})\)?\.*-*\s*(\d{3})\.*-*\s*(\d{4})$" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="pass1" name="password" class="form-control" placeholder="Password" required="">
+        <label for="inputPassword" class="sr-only">Renter Password</label>
+        <input type="password" id="pass2" name="repassword" class="form-control" placeholder="Renter Password" onkeyup="checkPass(); return false;" required="">
+        <span id="conMessage"></span>
+        <label for="inputPassword" class="sr-only">Firstname</label>
+        <input type="text" id="inputPassword" name="firstname" class="form-control" placeholder="Firstname" required="">
+        <label for="inputPassword" class="sr-only">Lastname</label>
+        <input type="text" id="inputPassword" name="lastname" class="form-control" placeholder="Lastname" required="">
+        <label for="inputPassword" class="sr-only">Email</label>
+        <input type="email" id="inputPassword" name="email" class="form-control" placeholder="Email" required="">
+        <label for="inputPassword" class="sr-only">Address</label>
+        <input type="text" id="inputPassword" name="address" class="form-control" placeholder="Address" required="">
+        <label for="inputPassword" class="sr-only">City</label>
+        <input type="text" id="inputPassword" name="city" class="form-control" placeholder="City" required="">
+        <label for="inputPassword" class="sr-only">State</label>
+        <input type="text" id="inputPassword" name="state" class="form-control" placeholder="State" required="">
+        <label for="inputPassword" class="sr-only">Country</label>
+        <input type="text" id="inputPassword" name="country" class="form-control" placeholder="Country" required="">
+        <label for="inputPassword" class="sr-only">Zipcode</label>
+        <input type="text" id="inputPassword" name="zipcode" class="form-control" placeholder="Zipcode" required="">
+	<br></br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      </form>
+
+    </div> <!-- /container -->
+	<script id="script_e1" type="text/javascript">
+                function checkPass()
+                {
+                        var pass1 = document.getElementById('pass1');
+                        var pass2 = document.getElementById('pass2');
+                        var msg = document.getElementById('conMessage');
+                        var gcolor = "#66cc66";
+                        var bcolor = "#ff6666";
+                        if(pass1.value == pass2.value){
+                                pass2.style.backgroundColor = gcolor;
+                                msg.style.color=gcolor;
+                                msg.innerHTML = "Passwords Match!"
+                        }
+                        else{
+                                pass2.style.backgroundColor = bcolor;
+                                msg.style.color = bcolor;
+                                msg.innerHTML = "Passwords Do Not Match!"
+                        }
+                }
+        </script>
+{% endblock %}
+

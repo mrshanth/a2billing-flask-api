@@ -1,0 +1,25 @@
+{% extends "dash2_base.html" %}
+{% block body %}
+{% if session.logged_in %}
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+                  <li role="presentation"><a href="{{ url_for('home') }}">Home</a></li>
+            <li role="presentation" class="active"><a href="{{ url_for('did') }}">Did</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">entVoice</h3>
+      </div>
+     </div>
+   <div class="container">
+	   {% if error %}<p> {{ error }} </p>{% endif %}
+       <form class="form-signin" action="{{ url_for('editdid') }}" method=post> 
+        <label>Destination</label>
+        <input type="tel" class="text" name="dest" size="15"/><br/>
+        <button class="btn btn-lg btn-success" type="submit">Save</button>
+      </form>
+      </div>
+{% endif %}
+{% endblock %}
